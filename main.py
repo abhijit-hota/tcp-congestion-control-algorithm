@@ -1,8 +1,7 @@
 import argparse
-import pathlib
 
 from simulate import simulate
-from utils import SimulateOptions, plot_tcp
+from utils import SimulateOptions, output_file, plot_tcp
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -59,7 +58,7 @@ if __name__ == "__main__":
         "-o",
         metavar="Output File",
         dest="output",
-        type=pathlib.Path,
+        type=str,
         default="out.log",
         help="The filepath to write the results to",
     )
@@ -70,6 +69,7 @@ if __name__ == "__main__":
 
     cw_list = simulate(**vars(options))
 
+    output_file(output, cw_list)
     with open(output, "w") as f:
         f.write("\n".join([str(cw) for cw in cw_list]))
 

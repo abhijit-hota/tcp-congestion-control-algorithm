@@ -35,7 +35,6 @@ def simulate(
             else:
                 # linear
                 cw = min(cw + kn * (MSS**2 / cw), RWS)
-
         else:
             # timeout
             congestion_threshold = cw * CONGESTION_THRESHOLD_FACTOR
