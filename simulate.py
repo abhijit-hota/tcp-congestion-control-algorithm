@@ -17,16 +17,16 @@ class SimulateOptions(argparse.Namespace):
 # Declaring constants (in kBs)
 MSS = 1
 RWS = 1 * 1024
-CONGESTION_THRESHOLD = 0.5
+CONGESTION_THRESHOLD_FACTOR = 0.5
 
 
 def simulate(options: SimulateOptions):
     cw = options.ki * MSS
-    ssthresh = CONGESTION_THRESHOLD * RWS
+    congestion_threshold = CONGESTION_THRESHOLD_FACTOR * RWS
 
     for _ in range(options.num_segments):
         if random() < options.ps:
-            if cw < ssthresh:
+            if cw < congestion_threshold:
                 # exponential
                 cw = min(RWS, cw + options.km * MSS)
             else:
@@ -35,7 +35,7 @@ def simulate(options: SimulateOptions):
 
         else:
             # timeout
-            ssthresh = cw / 2
+            congestion_threshold = cw / 2
             cw = max(1, options.kf * cw)
 
         print(cw)
