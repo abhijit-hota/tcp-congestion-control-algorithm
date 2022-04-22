@@ -70,7 +70,4 @@ if __name__ == "__main__":
     cw_list = simulate(**vars(options))
 
     output_file(output, cw_list)
-    with open(output, "w") as f:
-        f.write("\n".join([str(cw) for cw in cw_list]))
-
     plot_tcp(cw_list)
