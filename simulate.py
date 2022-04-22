@@ -1,7 +1,9 @@
 import argparse
 from pathlib import PosixPath
 from random import random
+from typing import List
 
+from matplotlib.pyplot import plot
 
 class SimulateOptions(argparse.Namespace):
     def __init__(self):
@@ -18,6 +20,8 @@ class SimulateOptions(argparse.Namespace):
 MSS = 1
 RWS = 1 * 1024
 CONGESTION_THRESHOLD_FACTOR = 0.5
+
+cw_list: List[float] = []
 
 
 def simulate(options: SimulateOptions):
@@ -38,5 +42,7 @@ def simulate(options: SimulateOptions):
             congestion_threshold = cw / 2
             cw = max(1, options.kf * cw)
 
+        cw_list.append(cw)
         print(cw)
 
+plot(cw_list)
