@@ -2,6 +2,7 @@ import argparse
 import pathlib
 
 from simulate import SimulateOptions, simulate
+import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -64,4 +65,11 @@ if __name__ == "__main__":
     )
 
     parsed = parser.parse_args(namespace=SimulateOptions())
-    simulate(parsed) 
+
+    cw_list = simulate(parsed)
+
+    with open(parsed.output, "w") as f:
+        f.write("\n".join([str(cw) for cw in cw_list]))
+
+    plt.plot([*range(len(cw_list))], cw_list)
+    plt.show()
