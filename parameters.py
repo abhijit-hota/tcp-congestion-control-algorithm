@@ -13,7 +13,7 @@ for ps in ps_values:
         for km in km_values:
             for kn in kn_values:
                 for kf in kf_values:
-                    cw_values = simulate(ki, km, kn, kf, ps, num_segments=1000000)
+                    cw_values = simulate(ki, km, kn, kf, ps, num_segments=100000)
                     fname = f"{ki}_{km}_{kn}_{kf}_{ps}"
-                    output_file(fname, cw_values)
+                    output_file("figures/" + fname + ".log", cw_values)
                     plot_tcp(cw_values, fname)
