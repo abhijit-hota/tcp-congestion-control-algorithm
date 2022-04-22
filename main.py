@@ -1,8 +1,8 @@
 import argparse
 import pathlib
 
-from simulate import SimulateOptions, simulate
-import matplotlib.pyplot as plt
+from simulate import simulate
+from utils import SimulateOptions, plot_tcp
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -64,12 +64,13 @@ if __name__ == "__main__":
         help="The filepath to write the results to",
     )
 
-    parsed = parser.parse_args(namespace=SimulateOptions())
+    options = parser.parse_args(namespace=SimulateOptions())
+    output = options.output
+    options.__delattr__("output")
 
-    cw_list = simulate(parsed)
+    cw_list = simulate(**vars(options))
 
-    with open(parsed.output, "w") as f:
+    with open(output, "w") as f:
         f.write("\n".join([str(cw) for cw in cw_list]))
 
-    plt.plot([*range(len(cw_list))], cw_list)
-    plt.show()
+    plot_tcp(cw_list)
