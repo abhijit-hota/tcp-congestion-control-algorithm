@@ -1,3 +1,4 @@
+from os import makedirs
 import sys
 from core import simulate
 from utils import SimulateOptions, write_to_file_and_save_graph
@@ -25,6 +26,7 @@ for ps in ps_values:
                         num_segments,
                     )
                     fname = f"ki_{ki}-km_{km}-kn_{kn}-kf_{kf}-ps_{ps}"
+                    makedirs("figures", exist_ok=True)
                     write_to_file_and_save_graph(
                         cw_values,
                         SimulateOptions(ki, km, kn, kf, ps, num_segments),
