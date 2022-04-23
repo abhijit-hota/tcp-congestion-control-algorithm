@@ -9,14 +9,17 @@ This repository consists of 4 Python files:
     This is the entry point for the simulator CLI application. The program accepts a number of parameters, calls the required functions that handle the simulation and outputs a graph of the congestion windows vs. sequence numbers. The detailed usage and options are [given below](#usage).
 
     [`argparse`](https://docs.python.org/3/library/argparse.html) from the standard library is used to parse and document the arguments. 
+
 - **`core.py`**  
-  This file consists of one function called `simulate` which is the most important part of this project. That function contains the actual simulation code. The `simulate` function takes all the parameters which are required for the simulation and returns a sequential list of congestion windows to be used for plotting or logging.
+  This file consists of one function called `simulate` which is contains the actual simulation code. The `simulate` function takes all the parameters which are required for the simulation and returns a sequential list of congestion windows to be used for plotting or logging.
   
   The algorithm is documented in the form of comments.
-- **`utils.py`**   
-  This file contains 2 helper functions that take the congestion window values as input and output the graph and write them to a file.
 
-  It also contains a helper class which basically adds abstraction for the options to be passed around.
+- **`utils.py`**   
+  This file contains a helper function that take the congestion window values as input and outputs a graph and writes them to a file.
+
+  It also contains a helper class which basically adds abstraction and typings for the options to be passed around.
+  
 - **`simulate_from_parameters.py`**  
   This file is an independent file which calls the `simulate` function with all the different variables mentioned in the problem statement and outputs log and image files to a `figures` folder.
 

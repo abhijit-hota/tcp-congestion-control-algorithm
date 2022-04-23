@@ -1,6 +1,6 @@
 import sys
 from core import simulate
-from utils import SimulateOptions, write_cw_values_to_file, plot_cw_vs_sequence
+from utils import SimulateOptions, write_to_file_and_save_graph
 
 
 ki_values = [1, 4]
@@ -25,8 +25,7 @@ for ps in ps_values:
                         num_segments,
                     )
                     fname = f"ki_{ki}-km_{km}-kn_{kn}-kf_{kf}-ps_{ps}"
-                    write_cw_values_to_file(cw_values, "figures/" + fname + ".log")
-                    plot_cw_vs_sequence(
+                    write_to_file_and_save_graph(
                         cw_values,
                         SimulateOptions(ki, km, kn, kf, ps, num_segments),
                         "figures/" + fname,

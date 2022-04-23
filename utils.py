@@ -23,11 +23,17 @@ class SimulateOptions(argparse.Namespace):
         self.output: str = output
 
 
-def plot_cw_vs_sequence(
+def write_to_file_and_save_graph(
     cw_list: List[float],
     options: SimulateOptions,
     name: str = "out",
 ):
+    print("Simulated for following parameters:")
+    print(
+        f"Ki = {options.ki}, Km = {options.km}, Kn = {options.kn}, Kf = {options.kf}, Ps = {options.ps}, T = {options.num_segments}"
+    )
+
+    # Plot
     plt.plot([*range(len(cw_list))], cw_list)
     plt.ylabel("Congestion Window (in MSS)", labelpad=8, fontweight="bold")
     plt.xlabel("Sequence Number", labelpad=10, fontweight="bold")
@@ -42,7 +48,9 @@ def plot_cw_vs_sequence(
     plt.savefig(f"{name}.svg")
     plt.close()
 
-
-def write_cw_values_to_file(cw_list: List[float], name: str):
+    # Write values to file
     with open(name + ".log", "w") as f:
         f.write("\n".join([str(cw) for cw in cw_list]))
+
+    print("Saved log file and graph.")
+    print("----------------------------------------------------------------")

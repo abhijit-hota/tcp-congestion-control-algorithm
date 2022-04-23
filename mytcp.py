@@ -1,7 +1,7 @@
 import argparse
 
 from core import simulate
-from utils import SimulateOptions, write_cw_values_to_file, plot_cw_vs_sequence
+from utils import SimulateOptions, write_to_file_and_save_graph
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -70,7 +70,5 @@ if __name__ == "__main__":
     output_filename = options.output
     options.__delattr__("output")
 
-    cw_list = simulate(**vars(options))
-
-    write_cw_values_to_file(cw_list, output_filename)
-    plot_cw_vs_sequence(cw_list, options, output_filename)
+    cw_values = simulate(**vars(options))
+    write_to_file_and_save_graph(cw_values, options, output_filename)
