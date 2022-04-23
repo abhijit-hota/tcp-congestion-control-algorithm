@@ -19,26 +19,30 @@ def simulate(
     num_segments: int,
 ) -> List[float]:
     cw_list: List[float] = []
+    congestion_threshold = RWS * CONGESTION_THRESHOLD_FACTOR
     cw = ki * MSS
-    congestion_threshold = CONGESTION_THRESHOLD_FACTOR * RWS
-
     segments_left = num_segments
 
     while segments_left > 0:
-        if random() < ps:
-            segments_sent = ceil(cw / MSS)
-            segments_left = max(segments_left - segments_sent, 0)
+        segments_to_send = ceil(cw / MSS)
 
-            if cw < congestion_threshold:
-                # exponential
-                cw = min(RWS, cw + km * MSS)
+        for _ in range(segments_to_send):
+            if random() < ps:
+                if cw < congestion_threshold:
+                    # exponential
+                    cw = min(RWS, cw + km * MSS)
+                else:
+                    # linear
+                    cw = min(cw + kn * (MSS**2 / cw), RWS)
+                segments_left = max(0, segments_left - 1)
+                cw_list.append(cw)
+
             else:
-                # linear
-                cw = min(cw + kn * (MSS**2 / cw), RWS)
-        else:
-            # timeout
-            congestion_threshold = cw * CONGESTION_THRESHOLD_FACTOR
-            cw = max(1, kf * cw)
-        cw_list.append(cw)
+                # timeout
+                congestion_threshold = cw * CONGESTION_THRESHOLD_FACTOR
+                segments_left = max(0, segments_left - 1)
+                cw = max(1, kf * cw)
+                cw_list.append(cw)
+                break
 
     return cw_list
