@@ -1,6 +1,6 @@
 import sys
-from simulate import simulate
-from utils import SimulateOptions, output_file, plot_tcp
+from core import simulate
+from utils import SimulateOptions, write_cw_values_to_file, plot_cw_vs_sequence
 
 
 ki_values = [1, 4]
@@ -25,8 +25,8 @@ for ps in ps_values:
                         num_segments,
                     )
                     fname = f"ki_{ki}-km_{km}-kn_{kn}-kf_{kf}-ps_{ps}"
-                    output_file("figures/" + fname + ".log", cw_values)
-                    plot_tcp(
+                    write_cw_values_to_file(cw_values, "figures/" + fname + ".log")
+                    plot_cw_vs_sequence(
                         cw_values,
                         SimulateOptions(ki, km, kn, kf, ps, num_segments),
                         "figures/" + fname,

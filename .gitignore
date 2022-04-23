@@ -1,4 +1,6 @@
 __pycache__
 *.pdf
+*.png
+*.svg
 *.log
 figures

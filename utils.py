@@ -23,7 +23,7 @@ class SimulateOptions(argparse.Namespace):
         self.output: str = output
 
 
-def plot_tcp(
+def plot_cw_vs_sequence(
     cw_list: List[float],
     options: SimulateOptions,
     name: str = "out",
@@ -43,6 +43,6 @@ def plot_tcp(
     plt.close()
 
 
-def output_file(name: str, cw_list: List[float]):
-    with open(name, "w") as f:
+def write_cw_values_to_file(cw_list: List[float], name: str):
+    with open(name + ".log", "w") as f:
         f.write("\n".join([str(cw) for cw in cw_list]))
