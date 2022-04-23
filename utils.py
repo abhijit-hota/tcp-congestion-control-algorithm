@@ -28,19 +28,18 @@ def plot_tcp(
     options: SimulateOptions,
     name: str = "out",
 ):
-    print(len(cw_list))
     plt.plot([*range(len(cw_list))], cw_list)
-    plt.ylabel("Congestion Window")  # type: ignore
-    plt.xlabel("Sequence Number")  # type: ignore
-    plt.suptitle("TCP Congestion Window Simulation", fontweight="bold")
-
+    plt.ylabel("Congestion Window (in MSS)", labelpad=8, fontweight="bold")
+    plt.xlabel("Sequence Number", labelpad=10, fontweight="bold")
     plt.title(
-        f"| $K_i$ = {options.ki} |  $K_m$ = {options.km} |  $K_n$ = {options.kn} |  $K_f$ = {options.kf} |  $P_s$ = {options.ps} |  $T$ = {options.num_segments} |",
+        f"$K_i$ = {options.ki} $│$ $K_m$ = {options.km} $│$ $K_n$ = {options.kn} $│$ $K_f$ = {options.kf} $│$ $P_s$ = {options.ps} $│$ $T$ = {options.num_segments}",
         fontsize=10,
+        fontweight="bold",
+        y=1.02,
     )
 
-    plt.tight_layout(pad=0.5)
-    plt.savefig(f"{name}.png")
+    plt.tight_layout()
+    plt.savefig(f"{name}.svg")
     plt.close()
 
 
