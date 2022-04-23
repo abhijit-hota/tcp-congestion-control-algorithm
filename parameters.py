@@ -22,10 +22,10 @@ for ps in ps_values:
                         ps,
                         num_segments,
                     )
-                    fname = f"{ki}_{km}_{kn}_{kf}_{ps}"
+                    fname = f"ki_{ki}-km_{km}-kn_{kn}-kf_{kf}-ps_{ps}"
                     output_file("figures/" + fname + ".log", cw_values)
                     plot_tcp(
                         cw_values,
                         SimulateOptions(ki, km, kn, kf, ps, num_segments),
-                        fname,
+                        "figures/" + fname,
                     )

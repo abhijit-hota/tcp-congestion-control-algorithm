@@ -40,9 +40,7 @@ def plot_tcp(
     )
 
     plt.tight_layout(pad=0.5)
-    plt.savefig(
-        f"./figures/{name}.png",
-    )
+    plt.savefig(f"{name}.png")
     plt.close()
 
 
