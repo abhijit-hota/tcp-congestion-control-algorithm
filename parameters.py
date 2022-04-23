@@ -1,3 +1,4 @@
+import sys
 from simulate import simulate
 from utils import SimulateOptions, output_file, plot_tcp
 
@@ -8,12 +9,13 @@ kn_values = [0.5, 1]
 kf_values = [0.1, 0.3]
 ps_values = [0.99, 0.9999]
 
+num_segments = int(sys.argv[1]) if len(sys.argv) > 1 else 1000
+
 for ps in ps_values:
     for ki in ki_values:
         for km in km_values:
             for kn in kn_values:
                 for kf in kf_values:
-                    num_segments = 100000
                     cw_values = simulate(
                         ki,
                         km,
