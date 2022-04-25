@@ -12,8 +12,6 @@ This repository consists of 4 Python files:
 
 - **`core.py`**  
   This file consists of one function called `simulate` which is contains the actual simulation code. The `simulate` function takes all the parameters which are required for the simulation and returns a sequential list of congestion windows to be used for plotting or logging.
-  
-  The algorithm is documented in the form of comments.
 
 - **`utils.py`**   
   This file contains a helper function that take the congestion window values as input and outputs a graph and writes them to a file.
@@ -62,7 +60,7 @@ This repository consists of 4 Python files:
 
 ## Report 
 
-The report analyzing the factors responsible for the graphs can be found as `CE19B033_Assgn4_Report.pdf`.
+The report analyzing the factors responsible for the graphs can be found as `report/CE19B033_A3_Report.pdf`.
 
 ---- 
 

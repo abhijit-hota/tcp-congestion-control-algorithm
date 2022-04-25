@@ -1,5 +1,6 @@
 __pycache__
-*.pdf
+!./report/CE19B033_A3_Report.pdf
+Assignment*
 *.png
 *.svg
 *.log

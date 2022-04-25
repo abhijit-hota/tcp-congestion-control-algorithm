@@ -1,0 +1,91 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+\title{
+    \Large Assignment 3 $\cdot$ CS32305 \\
+    \Large Introduction to Computer Networks
+    \rule[8pt]{\textwidth}{0.3pt}
+    \LARGE Simulation of the TCP \\ Congestion Control Algorithm 
+    \rule{\textwidth}{0.3pt}
+}
+\Large\author{Abhijit Hota $\cdot$ CE19B033}
+
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\section*{Introduction}
+
+The report should explain how different factors influence the $CW$ change over the duration of the session.
+
+\subsection*{Notations \& Assumptions}
+
+We repeat the notation and assumptions in the problem statement for the sake of completeness. We also add some of our own notations to ease the prose.
+
+\vspace*{8pt}
+
+\noindent\begin{tabular}{|c|p{0.66\textwidth}|c|}
+    \hline
+    \textbf{Notation} & \textbf{Description}                                                                           & \textbf{Range}            \\
+    \hline
+    $CW$              & Congestion window                                                                              &                           \\
+    \hline
+    $K_i$             & Initial CW                                                                                     & 1.0 $\le$ $K_i$ $\le$ 4.0 \\
+    \hline
+    $K_m$             & Multiplier of CW during the exponential growth phase                                           & 0.5 $\le$ $K_m$ $\le$ 2.0 \\
+    \hline
+    $K_n$             & Multiplier of CW during the linear growth phase                                                & 0.5 $\le$ $K_n$ $\le$ 2.0 \\
+    \hline
+    $K_f$             & Multiplier when a timeout occurs                                                               & 0.1 $\le$ $K_f$ $\le$ 0.5 \\
+    \hline
+    $P_s$             & Probability of receiving the \texttt{ACK} packet for a given segment before its timeout occurs & 0.0 $\le$ $P_s$ $\le$ 1.0 \\
+    \hline
+    $T$               & Number of segments to be sent for the emulation                                                &                           \\
+    \hline
+\end{tabular}
+\subsection*{Methodology}
+
+The task was to assess the congestion control algorithm of TCP with various parameters. A total of $6$ changeable parameters can be given to the simulation which affect the congestion window size.
+
+\noindent
+The following arguments were given to us.
+
+\vspace*{8pt}
+
+\noindent
+$K_i \in \{1, 4\}, K_m \in \{1, 1.5\}, K_n \in \{0.5, 1\}, K_f \in \{0.1, 0.3\}, P_s \in \{0.99, 0.9999\}$
+\vspace*{8pt}
+
+\noindent
+All combination makes a total of $32$ possible graphs. A value of $1000$ was taken for $T$. A Python script was created to iterate over all possible values and output the files to the path \texttt{/figures/*.svg} and \texttt{/figures/*.log}.
+
+\vspace*{8pt}
+\noindent
+The Python script can be found in the code repository with the name \\ \texttt{simulate\_from\_parameters.py}
+
+\newpage
+
+\setcounter{page}{24}
+
+\section*{Conclusion}
+
+\begin{list}{$\bullet$}{}
+    \item The $CW$ values depend on all of the parameters but they are also heavily dependent on the probability of successful \texttt{ACK}.
+    \item The highest $CW$ matters in determining the shape of the graph.
+    \item A higher $K_f$, $K_m$ and $K_n$ value generally give higher $CW$ values.
+    \item An extra parameter can also be tested, i.e, the factor by which the congestion threshold was decreased.
+    \item The formulae suggest an AIMD (Additive Increase Multiplicative Decrease) algorithm.
+    \item The terms \emph{exponential} and \emph{linear} are kind of misnomers as during the phase where $CW$ is less than the threshold, it increases rapidly but linearly whereas during the later phase when the $CW$ is higher than the threshold, it increases in a logarithmic manner.
+\end{list}
+
+\end{document}
